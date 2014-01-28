@@ -1,10 +1,13 @@
 package com.wt.calendarcard;
 
+import com.wt.calendar_card.R;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class CheckableLayout extends RelativeLayout implements Checkable {
@@ -29,6 +32,21 @@ public class CheckableLayout extends RelativeLayout implements Checkable {
     public CheckableLayout(Context context) {
         super(context);
         init();
+    }
+    /**
+     * Add the "date has events icon"
+     */
+    public void addData() {
+    	ImageView img = new ImageView(getContext());
+    	img.setImageResource(R.drawable.icon);
+    	
+    	RelativeLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    	lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+    	lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+    	
+    	img.setLayoutParams(lp);
+    	
+    	addView(img);
     }
     
     private void init() {

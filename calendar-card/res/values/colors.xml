@@ -1,6 +1,7 @@
 <resources>
 
-    <color name="grid_bg">#FFFFFFFF</color>
+    <color name="grid_bg">#00f</color>
     <color name="grid_border">#FFC6C6C6</color>
-
+    <color name="current_day">#f00</color>
+    <color name="external_days">#0f0</color>
 </resources>

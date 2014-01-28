@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -18,7 +18,8 @@
     </style>
     
     <style name="CalendarCard">
-        
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">#00f</item>
     </style>
     
     <style name="CalendarCard.Root">
@@ -44,7 +45,6 @@
     </style>
     
     <style name="CalendarCard.Grid">
-        <item name="android:background">@drawable/card_grid_bg</item>
         <item name="android:paddingRight">1dp</item>
         <item name="android:paddingBottom">1dp</item>
     </style>

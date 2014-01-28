@@ -1,19 +1,24 @@
 package com.wt.calendarcard;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.content.Context;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Pair;
 import android.view.View;
 
 public class CardPagerAdapter extends PagerAdapter {
 	
 	private Context mContext;
 	
+	private ArrayList<Pair<Long, Long>> events;
+	
 	public CardPagerAdapter(Context ctx) {
 		mContext = ctx;
+		this.events = null;
 	}
 
 	@Override
@@ -21,6 +26,7 @@ public class CardPagerAdapter extends PagerAdapter {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, position);
 		CalendarCard card = new CalendarCard(mContext);
+		card.addEvents(events);
 		card.setDateDisplay(cal);
 		card.notifyChanges();
 		
@@ -52,6 +58,10 @@ public class CardPagerAdapter extends PagerAdapter {
 	public int getCount() {
 		// TODO almoast ifinite ;-)
 		return Integer.MAX_VALUE;
+	}
+
+	public void setEvents(ArrayList<Pair<Long, Long>> events) {
+		this.events = events;
 	}
 
 }

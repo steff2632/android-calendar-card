@@ -6,7 +6,9 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,6 +27,7 @@ public class CalendarCard extends RelativeLayout {
 	private Calendar dateDisplay;
 	private ArrayList<CheckableLayout> cells = new ArrayList<CheckableLayout>();
 	private LinearLayout cardGrid;
+	private boolean currentMonth = true;
 
 	public CalendarCard(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -41,6 +44,24 @@ public class CalendarCard extends RelativeLayout {
 		init(context);
 	}
 	
+	public void addEvents(ArrayList<Pair<Long, Long>> events) {
+		
+		Calendar calendar = Calendar.getInstance();
+		for(int i = 0; i < events.size(); i++) {
+			calendar.setTimeInMillis(events.get(i).first);
+			
+			for(int j = 0; j < cells.size(); j++) {
+				CheckableLayout day = cells.get(j);
+				
+				CardGridItem data = (CardGridItem) day.getTag();
+				if(data.getDayOfMonth() == calendar.get(Calendar.DAY_OF_MONTH)) {
+					day.addData();
+					break;
+				}
+			}
+		}
+	}
+	
 	private void init(Context ctx) {
 		if (isInEditMode()) return;
 		View layout = LayoutInflater.from(ctx).inflate(R.layout.card_view, null, false);
@@ -51,7 +72,7 @@ public class CalendarCard extends RelativeLayout {
 		cardTitle = (TextView)layout.findViewById(R.id.cardTitle);
 		cardGrid = (LinearLayout)layout.findViewById(R.id.cardGrid);
 		
-		cardTitle.setText(new SimpleDateFormat("MMM yyyy", Locale.getDefault()).format(dateDisplay.getTime()));
+		cardTitle.setText(new SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(dateDisplay.getTime()));
 		
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -97,7 +118,24 @@ public class CalendarCard extends RelativeLayout {
 		mOnItemRenderDefault = new OnItemRender() {
 			@Override
 			public void onRender(CheckableLayout v, CardGridItem item) {
-				((TextView)v.getChildAt(0)).setText(item.getDayOfMonth().toString());
+				TextView view;
+				
+				Resources res = getResources();
+				
+				try {
+					view = (TextView) v.getChildAt(0);
+				} catch (ClassCastException e) {		//date has an activity icon on it
+					view = (TextView) v.getChildAt(1);
+				}
+				
+				view.setText(item.getDayOfMonth().toString());
+				Calendar cardDate = item.getDate();
+				
+				if(currentMonth && cardDate != null && cardDate.compareTo(dateDisplay) == 0) {
+					view.setBackgroundColor(res.getColor(R.color.current_day));
+				} else {
+					view.setBackgroundColor(res.getColor(android.R.color.transparent));
+				}
 			}
 		};
 		
@@ -218,7 +256,13 @@ public class CalendarCard extends RelativeLayout {
 
 	public void setDateDisplay(Calendar dateDisplay) {
 		this.dateDisplay = dateDisplay;
-		cardTitle.setText(new SimpleDateFormat("MMM yyyy", Locale.getDefault()).format(dateDisplay.getTime()));
+		cardTitle.setText(new SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(dateDisplay.getTime()));
+		
+		if(dateDisplay.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH) &&
+				dateDisplay.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR))
+			currentMonth = true;
+		else
+			currentMonth = false;
 	}
 
 	public OnCellItemClick getOnCellItemClick() {

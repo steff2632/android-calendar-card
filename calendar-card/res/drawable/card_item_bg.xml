@@ -7,21 +7,23 @@
         </shape>
     </item>
     
-    <item android:state_checked="true" android:state_enabled="true">
-        <shape>
-            <solid android:color="#77DBDBDB"/>
+    <item android:state_checked="true" android:state_enabled="true" >
+        <shape
+            android:shape="oval">
+            <solid android:color="@android:color/white"/>
         </shape>
+        
     </item>
     
     <item android:state_enabled="false">
-        <shape>
-            <solid android:color="#FFF0F0F0"/>
-        </shape>
+       <shape>
+           <solid android:color="#0f0"/>
+       </shape>
     </item>
     
     <item>
         <shape>
-            <solid android:color="#FFFFFFFF"/>
+            <solid android:color="@color/grid_bg"/>
         </shape>
     </item>
 </selector>

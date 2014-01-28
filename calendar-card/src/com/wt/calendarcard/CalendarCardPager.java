@@ -1,8 +1,11 @@
 package com.wt.calendarcard;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Pair;
 
 public class CalendarCardPager extends ViewPager {
 	
@@ -30,6 +33,10 @@ public class CalendarCardPager extends ViewPager {
 	
 	public CardPagerAdapter getCardPagerAdapter() {
 		return mCardPagerAdapter;
+	}
+	
+	public void addEvents(ArrayList<Pair<Long, Long>> events) {
+		mCardPagerAdapter.setEvents(events);
 	}
 
 }
