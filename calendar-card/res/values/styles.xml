@@ -19,7 +19,7 @@
     
     <style name="CalendarCard">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">#00f</item>
+        <item name="android:background">@color/grid_bg</item>
     </style>
     
     <style name="CalendarCard.Root">
