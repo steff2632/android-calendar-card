@@ -132,9 +132,9 @@ public class CalendarCard extends RelativeLayout {
 				Calendar cardDate = item.getDate();
 				
 				if(currentMonth && cardDate != null && cardDate.compareTo(dateDisplay) == 0) {
-					view.setBackgroundColor(res.getColor(R.color.current_day));
+					view.setBackgroundResource(R.drawable.todays_highlight);
 				} else {
-					view.setBackgroundColor(res.getColor(android.R.color.transparent));
+					view.setBackgroundDrawable(null);
 				}
 			}
 		};
