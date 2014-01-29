@@ -6,11 +6,11 @@
     </item>
     
     <item android:state_checked="true" android:state_enabled="true" 
-        android:color="#00f">
+        android:color="@color/grid_bg">
     </item>
     
-    <item android:state_enabled="false"
-        android:color="#c4c4c4">
+    <item android:state_enabled="false" 
+        android:color="@color/external_days">
     </item>
     
     <item
