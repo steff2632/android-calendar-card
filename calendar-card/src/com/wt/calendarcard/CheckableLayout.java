@@ -1,6 +1,6 @@
 package com.wt.calendarcard;
 
-import com.wt.calendar_card.R;
+import java.lang.reflect.Method;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
+import com.wt.calendar_card.R;
 
 public class CheckableLayout extends RelativeLayout implements Checkable {
 
@@ -77,6 +79,32 @@ public class CheckableLayout extends RelativeLayout implements Checkable {
                 ((Checkable)child).setChecked(checked);
             }
         }
+    }
+    
+    @Override
+    public void addView(View child) {
+    	
+    	//giving the newly added view the same states as the parent.
+    	child.setEnabled(isEnabled());
+
+    	
+    	if(child instanceof Checkable) {
+    		((Checkable) child).setChecked(isChecked());
+    	}
+    	
+    	super.addView(child);
+    }
+    
+    @Override
+    public void setEnabled(boolean enabled) {
+    	
+    	View view;
+    	for(int i = 0; i < getChildCount(); i++) {
+    		view = getChildAt(i);
+    		view.setEnabled(enabled);
+    	}
+    	
+    	super.setEnabled(enabled);
     }
     
     @Override
