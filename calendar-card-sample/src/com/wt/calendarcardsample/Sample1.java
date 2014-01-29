@@ -1,11 +1,14 @@
 package com.wt.calendarcardsample;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -27,7 +30,6 @@ public class Sample1 extends Activity {
 		mCalendarCard = (CalendarCard)findViewById(R.id.calendarCard1);
 		
 		final Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.MONTH, 1);
 		mCalendarCard.setDateDisplay(calendar);
 		mCalendarCard.notifyChanges();
 		
@@ -38,6 +40,7 @@ public class Sample1 extends Activity {
 			public void onClick(View v) {
 				calendar.add(Calendar.MONTH, 1);
 				mCalendarCard.setDateDisplay(calendar);
+				mCalendarCard.notifyChanges();
 			}
 		});
 		
@@ -48,6 +51,7 @@ public class Sample1 extends Activity {
 			public void onClick(View v) {
 				calendar.add(Calendar.MONTH, -1);
 				mCalendarCard.setDateDisplay(calendar);
+				mCalendarCard.notifyChanges();
 				
 			}
 		});
@@ -61,6 +65,23 @@ public class Sample1 extends Activity {
 		
 		
 		mTextView = (TextView)findViewById(R.id.textView1);
+		ArrayList<Pair<Long, Long>> calendarTimes = new ArrayList<Pair<Long,Long>>();
+		
+		Pair pair;
+		Calendar calender;
+		Random random = new Random();
+		
+		for (int i = 0; i < 10; i++) {
+			
+			calender = Calendar.getInstance();
+			calender.roll(Calendar.DAY_OF_MONTH, random.nextInt());
+			
+			pair = new Pair<Long, Long>(calender.getTimeInMillis(), calender.getTimeInMillis() + 86400000);
+			
+			calendarTimes.add(pair);
+		}
+		
+		mCalendarCard.addEvents(calendarTimes);
 	}
 
 }
