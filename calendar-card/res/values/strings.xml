@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">calendar-card</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
 </resources>
