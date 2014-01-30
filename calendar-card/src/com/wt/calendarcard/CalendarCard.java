@@ -166,10 +166,10 @@ public class CalendarCard extends RelativeLayout {
 		int daySpacing = getDaySpacing(cal.get(Calendar.DAY_OF_WEEK));
 		
 		if (daySpacing > 0) {
-			Calendar prevMonth = Calendar.getInstance();
+			Calendar prevMonth = (Calendar) dateDisplay.clone();
 			prevMonth.add(Calendar.MONTH, -1);
 			prevMonth.set(Calendar.DAY_OF_MONTH, prevMonth.getActualMaximum(Calendar.DAY_OF_MONTH));
-			int lastDayOfPrevMonth = prevMonth.get(Calendar.DAY_OF_MONTH)+1;
+			int lastDayOfPrevMonth = prevMonth.get(Calendar.DAY_OF_MONTH);
 			for(int i=lastDayOfPrevMonth-daySpacing+1; i<lastDayOfPrevMonth+1; i++) {
 				CheckableLayout cell = cells.get(counter);
 				cell.setTag(new CardGridItem(i).setEnabled(false));
