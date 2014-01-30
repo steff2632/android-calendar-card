@@ -1,7 +1,5 @@
 package com.wt.calendarcard;
 
-import java.lang.reflect.Method;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -40,7 +38,7 @@ public class CheckableLayout extends RelativeLayout implements Checkable {
      */
     public void addData() {
     	ImageView img = new ImageView(getContext());
-    	img.setImageResource(R.drawable.icon);
+    	img.setImageResource(R.drawable.white_dot);
     	
     	RelativeLayout.LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
     	lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
