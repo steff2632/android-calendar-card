@@ -33,7 +33,7 @@ public class Sample1 extends Activity {
 		mCalendarCard.setDateDisplay(calendar);
 		mCalendarCard.notifyChanges();
 		
-		Button btn = (Button)findViewById(R.id.button1);
+		Button btn = (Button)findViewById(R.id.btn_prev);
 		btn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -44,7 +44,7 @@ public class Sample1 extends Activity {
 			}
 		});
 		
-		Button button = (Button) findViewById(R.id.button2);
+		Button button = (Button) findViewById(R.id.btn_next);
 		button.setOnClickListener(new OnClickListener() {
 			
 			@Override
