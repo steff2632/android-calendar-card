@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.wt.calendar_card.R;
@@ -44,7 +45,7 @@ public class CalendarCardView extends RelativeLayout {
 		
 		mCalendarCard = (CalendarCard) view.findViewById(R.id.calendarCard1);
 		
-		Button btn_next = (Button) view.findViewById(R.id.btn_next);
+		ImageButton btn_next = (ImageButton) view.findViewById(R.id.btn_next);
 		btn_next.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -55,7 +56,7 @@ public class CalendarCardView extends RelativeLayout {
 			}
 		});
 		
-		Button btn_prev = (Button) view.findViewById(R.id.btn_prev);
+		ImageButton btn_prev = (ImageButton) view.findViewById(R.id.btn_prev);
 		btn_prev.setOnClickListener(new OnClickListener() {
 			
 			@Override

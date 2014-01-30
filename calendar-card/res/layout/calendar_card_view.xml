@@ -8,27 +8,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     
-    <Button 
+    <ImageButton 
         android:id="@+id/btn_prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/previous"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/previous"
+        android:src="@drawable/back"
+        android:background="@android:color/transparent"
         android:layout_alignLeft="@+id/calendarCard1"/>
     
-    <Button 
+    <ImageButton 
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/next"
+        android:src="@drawable/forward"
+        android:background="@android:color/transparent"
         android:layout_alignRight="@+id/calendarCard1"/>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/calendarCard1"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp" />
 
 </RelativeLayout>
