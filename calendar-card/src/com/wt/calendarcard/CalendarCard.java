@@ -27,7 +27,6 @@ public class CalendarCard extends RelativeLayout {
 	private Calendar dateDisplay;
 	private ArrayList<CheckableLayout> cells = new ArrayList<CheckableLayout>();
 	private LinearLayout cardGrid;
-	private boolean currentMonth = true;
 
 	public CalendarCard(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -131,11 +130,6 @@ public class CalendarCard extends RelativeLayout {
 				view.setText(item.getDayOfMonth().toString());
 				Calendar cardDate = item.getDate();
 				
-				if(currentMonth && cardDate != null && cardDate.compareTo(dateDisplay) == 0) {
-					view.setBackgroundResource(R.drawable.todays_highlight);
-				} else {
-					view.setBackgroundDrawable(null);
-				}
 			}
 		};
 		
@@ -179,6 +173,8 @@ public class CalendarCard extends RelativeLayout {
 			}
 		}
 		
+		Calendar today = Calendar.getInstance();
+		
 		int firstDay = cal.get(Calendar.DAY_OF_MONTH);
 		cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
 		int lastDay = cal.get(Calendar.DAY_OF_MONTH)+1;
@@ -189,7 +185,13 @@ public class CalendarCard extends RelativeLayout {
 			CheckableLayout cell = cells.get(counter);
 			cell.setTag(new CardGridItem(i).setEnabled(true).setDate(date));
 			cell.setEnabled(true);
-			cell.setVisibility(View.VISIBLE);
+			
+			if((dateDisplay.get(Calendar.MONTH) == today.get(Calendar.MONTH)) && (i == today.get(Calendar.DAY_OF_MONTH))) {
+					cell.setBackgroundResource(R.drawable.todays_highlight);
+			} else {
+				cell.setBackgroundDrawable(null);
+			}
+			
 			(mOnItemRender == null ? mOnItemRenderDefault : mOnItemRender).onRender(cell, (CardGridItem)cell.getTag());
 			counter++;
 		}
@@ -257,12 +259,6 @@ public class CalendarCard extends RelativeLayout {
 	public void setDateDisplay(Calendar dateDisplay) {
 		this.dateDisplay = dateDisplay;
 		cardTitle.setText(new SimpleDateFormat("MMMM yyyy", Locale.getDefault()).format(dateDisplay.getTime()));
-		
-		if(dateDisplay.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH) &&
-				dateDisplay.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR))
-			currentMonth = true;
-		else
-			currentMonth = false;
 	}
 
 	public OnCellItemClick getOnCellItemClick() {
